@@ -9,7 +9,7 @@
 <body>
 
 <br/>
-<form th:method="POST" th:action="@{/update/{id}(id = ${user.getId()})}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/update/{id}(id = ${user.getId()})}" th:object="${user}">
 
   <label for="name">User name</label>
   <input type="text" th:field="*{name}" id="name">
@@ -22,7 +22,7 @@
 </form>
 
 <br/>
-<form th:method="GET" th:action="@{/delete/{id}(id = ${user.getId()})}" th:object="${user}">
+<form th:method="DELETE" th:action="@{/delete/{id}(id = ${user.getId()})}" th:object="${user}">
   <input type="submit" value="Delete this user">
 </form>
 

@@ -3,6 +3,7 @@ package com.spring._1_1.controller;
 import com.spring._1_1.model.User;
 import com.spring._1_1.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,18 +35,19 @@ public class UserController {
     }
 
     @GetMapping("change/{id}")
+    @Transactional
     public String changeUser(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.get(id));
         return "changeUser";
     }
 
-    @PostMapping ("/update/{id}")
+    @PatchMapping ("/update/{id}")
     public String saveChanges(@ModelAttribute("user") User user) {
-        userService.add(user);
+        userService.update(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.delete(id);
         return "redirect:/users";
